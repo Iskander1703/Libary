@@ -1,6 +1,8 @@
 package iskander.tabaev.LibaryRESTApi.services;
 
 import iskander.tabaev.LibaryRESTApi.Entity.Author;
+import iskander.tabaev.LibaryRESTApi.Entity.Book;
+import iskander.tabaev.LibaryRESTApi.Entity.Edition;
 import iskander.tabaev.LibaryRESTApi.repositories.AuthorRepository;
 import iskander.tabaev.LibaryRESTApi.util.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,12 @@ public class AuthorService {
 
     @Transactional
     public void saveAuthor(Author author){
+        enrichAuthor(author);
         authorRepository.save(author);
+    }
+
+    private void enrichAuthor(Author author){
+        author.setBooks(null);
     }
 }
 

@@ -1,5 +1,6 @@
 package iskander.tabaev.LibaryRESTApi.services;
 
+import iskander.tabaev.LibaryRESTApi.Entity.Author;
 import iskander.tabaev.LibaryRESTApi.Entity.Book;
 import iskander.tabaev.LibaryRESTApi.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,12 @@ public class BookService {
 
     @Transactional
     public void saveBook(Book book){
+        enrichBook(book);
         bookRepository.save(book);
+    }
+
+    private void enrichBook(Book book){
+        book.setDateOfTaken(null);
+        book.setDateOfReturn(null);
     }
 }
